@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Remaining Delivery</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <!-- <a href="{% url 'index' %}"><button type="button" class="btn btn-primary">Go back to home</button></a> -->
+  
+    <div class="col-md-12 text-right">
+      <a href="{% url 'transporter_index' %}"><button type="button" class="btn btn-primary">Go back to home</button></a>
+    </div>
+
+<div class="container">
+  
+  
+        <!-- <button type="button" class="btn btn-primary">Cancel</button> -->
+
+  
+  <h2 class="mx-2">Remaining Delivery</h2>
+  
+  <table class="table mx-2">
+    <thead>
+      <tr>
+        
+        <th>Username</th>
+        <th>Material Name</th>
+        <th>Quantity</th>
+        <th>Address</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th>Remarks</th>
+        <th>Update / Delivered</th>
+    
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        {% for i in order %}
+        {% if i.transporter.email == request.session.email %}
+          {% if i.order.status == 'Active' %}
+      <tr>
+        <td>{{i.order.user.name}}</td>
+        <td>{{i.order.material_name}}</td>
+        <td>{{i.order.quantity}}</td>
+        <td>{{i.order.address}}</td>
+        <td>{{i.order.status}}</td>
+        <td>{{i.order.total_amount}}</td>
+        <td>{{i.remarks}}</td>
+        <td><a href="{% url 'update_delivery' i.pk %}"><button type="button" class="btn btn-success">Update Delivery Status</button></a> 
+            {% comment %} <a href="{% url 'delete_item' i.pk %}"><button type="button" class="btn btn-danger">Delete</button></a> {% endcomment %}
+            <a href="{% url 'complete_order' i.pk %}"><button type="button" class="btn btn-primary">Delivered</button></a></td>
+        
+      </tr>
+      {% endif %}
+      {% endif %}
+    {% endfor %}
+        {% comment %} <td>{{i.material_name}}</td> 
+        <td>{{i.quantity}}</td>
+        <td>{{i.address}}</td>
+        <td>{{i.status}}</td>
+        <td>{{i.total_amount}}</td>
+        <td><a href="{% url 'update_order' i.pk %}"><button type="button" class="btn btn-success">Update</button></a> 
+            <a href="{% url 'delete_item' i.pk %}"><button type="button" class="btn btn-danger">Delivered</button></a> {% endcomment %}
+            {% comment %} <a href="{% url 'pay' i.pk %}"><button type="button" class="btn btn-primary">Pay</button></a></td> {% endcomment %}
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Order</title>
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+</head>
+<body>
+    
+    <h1>Sand</h1>
+    <form action="{% url 'update_order' pk %}" method='POST'>
+
+    {% csrf_token %}
+
+        <div class="container">
+            <h1 style="text-align:center">Update your order</h1>
+
+            <label for="quantity">Material Name: <b> {{order.material_name}} </b></label><br><br>
+            
+
+            <label for="quantity">Quantity:</label>
+            <input type="text" name="quantity" value="{{order.quantity}}" placeholder="Enter the quantity of cement" size="15" required />
+
+            {% comment %} <label for="price">Price: {{cprice}}</label><br><br><br> {% endcomment %}
+            {% comment %} <input type="hidden" name="cprice" value="{{cprice}}"> {% endcomment %}
+
+            <label for="price">Price: {{order.price}}</label><br><br><br>
+            <input type="hidden" name="price" value="">
+
+
+            <label for="address">Address:</label>
+            <textarea cols="80" rows="5" name="address" placeholder="Enter your address" required>{{order.address}}
+            </textarea>
+
+            <label for="address">Status: Pending</label>
+            <br><br><br>
+
+            
+            <button type="submit" class="registerbtn">Update</button>
+        </div>
+
+       
+    </form>
+    {% if msg %}
+        <h4>{{msg}}</h4>
+    {% endif %}
+    
+</body>
+</html>

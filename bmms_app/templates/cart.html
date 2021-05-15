@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Cart</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <!-- <a href="{% url 'index' %}"><button type="button" class="btn btn-primary">Go back to home</button></a> -->
+  
+    <div class="col-md-12 text-right">
+      <a href="{% url 'index' %}"><button type="button" class="btn btn-primary">Go back to home</button></a>
+    </div>
+
+<div class="container">
+  
+  
+        <!-- <button type="button" class="btn btn-primary">Cancel</button> -->
+
+  
+  <h2 class="mx-2">Cart</h2>
+  
+  <table class="table mx-2">
+    <thead>
+      <tr>
+        <th>Material Name</th>
+        <th>Quantity</th>
+        <th>Address</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th>Add / Remove</th>
+    
+      </tr>
+    </thead>
+    
+    <tbody>
+    {% for i in order %}
+        {% if i.user.email == request.session.email %}
+          {% if i.status == 'pending' %}
+      <tr>
+        <td>{{i.material_name}}</td>
+        <td>{{i.quantity}}</td>
+        <td>{{i.address}}</td>
+        <td>{{i.status}}</td>
+        <td>{{i.total_amount}}</td>
+        <td><a href="{% url 'update_order' i.pk %}"><button type="button" class="btn btn-success">Update</button></a> 
+            <a href="{% url 'delete_item' i.pk %}"><button type="button" class="btn btn-danger">Delete</button></a>
+            <a href="{% url 'pay' i.pk %}"><button type="button" class="btn btn-primary">Pay</button></a></td>
+        
+      </tr>
+      {% endif %}
+      {% endif %}
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

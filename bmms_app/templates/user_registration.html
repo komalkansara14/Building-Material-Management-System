@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user Registration</title>
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+    
+</head>
+<body>
+    
+    <form action="{% url 'user_register' %}" method='POST'>
+
+    {% csrf_token %}
+
+        <div class="container">
+            <h1 style="text-align:center">User Registration</h1>
+            <p style="text-align:center">Please fill your details for the registration.</p>
+            <hr>
+
+            <label for="name">Name:</label>
+            <input type="text" name="name" placeholder="Enter your name" size="15" required/>
+            
+            <label for="email">Email:</label>
+            <input type="text" name="email" placeholder="Enter your E-mail" size="15" required/>
+            
+            <label for="re_email">Re-enter your Email:</label>
+            <input type="text" name="cemail" placeholder="Re-enter your E-mail" size="15" required/>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" placeholder="Enter the password" size="15"  
+                 required required/>
+
+            {% comment %} <label for="re_password">Re-enter your Password:</label> {% endcomment %}
+            {% comment %} <input type="password" name="cpassword" placeholder="Re-enter the password" size="15" required/> {% endcomment %}
+
+            <label for="Phone_no">Phone No.:</label>
+            <input type="text" name="phone_no" placeholder="Enter your phone no." size="10" size="2" required/>
+            
+            <label for="address">Address:</label>
+            <textarea cols="80" rows="5" name="address" placeholder="Enter your address" required/>
+            </textarea>
+
+            <button type="submit" class="registerbtn">Register</button>
+
+            {% if msg %}
+            <h4 style="text-align:center;">{{msg}}</h4>
+            {% endif %}
+        </div>
+        
+        <div class="container signin">
+            <p>Already have an account? <a href="#">Sign in</a>.</p>
+          </div>
+
+    </form>
+
+    <div id="message">
+        <h3>Password must contain the following:</h3>
+        <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+        <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+        <p id="number" class="invalid">A <b>number</b></p>
+        <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+      </div>
+
+    
+
+</body>
+</html>

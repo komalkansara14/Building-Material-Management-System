@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My Order</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="col-md-12 text-right">
+      <a href="{% url 'index' %}"><button type="button" class="btn btn-primary">Go back to home</button></a>
+    </div>
+
+{% comment %} <a href="{% url 'index' %}"><button type="button" class="btn btn-primary">Go back to home</button></a> {% endcomment %}
+
+<div class="container">
+  
+  <h2 class="mx-2">My Orders</h2>
+  
+  
+  <table class="table mx-2">
+    <thead>
+      <tr>
+        <th>Material Name</th>
+        <th>Quantity</th>
+        <th>Address</th>        
+        <th>Paid</th>
+        <th>Order ID</th>
+        <th>Transporter Name</th>
+        <th>Vehicle</th>
+        <th>Remarks</th>
+        
+    
+      </tr>
+    </thead>
+    <tbody>
+    {% for i in order %}
+        {% if i.order.user.email == request.session.email %}
+          {% if i.order.status == 'Active' %}
+      <tr>
+        <td>{{i.order.material_name}}</td>
+        <td>{{i.order.quantity}}</td>
+        <td>{{i.order.address}}</td>
+        <td>{{i.order.total_amount}}</td>
+        <td>{{i.pay_id}}</td>
+        <td>{{i.transporter.name}}</td>
+        <td>{{i.transporter.vehicle_no}}</td>
+        <td>{{i.remarks}}</td>
+        
+      </tr>
+      {% endif %}
+      {% endif %}
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

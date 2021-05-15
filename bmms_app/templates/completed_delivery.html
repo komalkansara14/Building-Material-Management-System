@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Completed Deliveries</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="col-md-12 text-right">
+      <a href="{% url 'transporter_index' %}"><button type="button" class="btn btn-primary">Go back to home</button></a>
+    </div>
+
+{% comment %} <a href="{% url 'index' %}"><button type="button" class="btn btn-primary">Go back to home</button></a> {% endcomment %}
+
+<div class="container">
+  
+  <h2 class="mx-2">Completed Deliveries</h2>
+  
+  
+  <table class="table mx-2">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Material Name</th>
+        <th>Quantity</th>
+        <th>Address</th>
+        <th>Status</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for i in cd %}
+        {% if i.delivered.transporter.email == request.session.email %}
+        {% if i.status == "Completed"%}
+          <tr>
+            <td>{{i.delivered.order.user.name}}</td>
+            <td>{{i.delivered.order.material_name}}</td>
+            <td>{{i.delivered.order.quantity}}</td>
+            <td>{{i.delivered.order.address}}</td>
+            {% comment %} <td>{{i.delivered.order.status}}</td> {% endcomment %}
+            <td>{{i.status}}</td>
+            <td>{{i.delivered.order.total_amount}}</td>
+        
+      </tr>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

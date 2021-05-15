@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transporter Registration</title>
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+</head>
+<body>
+
+    
+    <form action="{% url 'transporter_register' %}" method='POST'>
+
+    {% csrf_token %}
+
+        <div class="container">
+            <h1 style="text-align:center">Transporter Registration</h1>
+            <p style="text-align:center">Please fill your details for the registration.</p>
+            <hr>
+
+            <label for="name">Name:</label>
+            <input type="text" name="name" placeholder="Enter your name" size="15" required/>
+            
+            <label for="email">Email:</label>
+            <input type="text" name="email" placeholder="Enter your E-mail" size="15" required/>
+            
+            <label for="re_email">Re-enter your Email:</label>
+            <input type="text" name="cemail" placeholder="Re-enter your E-mail" size="15" required/>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" placeholder="Enter the password" size="15" required/>
+
+            {% comment %} <label for="re_password">Re-enter your Password:</label> {% endcomment %}
+            {% comment %} <input type="password" name="cpassword" placeholder="Re-enter the password" size="15" required/> {% endcomment %}
+
+            <label for="phone_no">Phone No.:</label>
+            <input type="text" name="phone_no" placeholder="Enter your phone no." size="10" size="2" required/>
+
+            <label for="vehicle_no">Vehicle No.:</label>
+            <input type="text" name="vehicle_no" placeholder="Enter your vehicle no." size="10" size="2" required/>
+
+            
+            <label for="address">Address:</label>
+            <textarea cols="80" rows="5" name="address" placeholder="Enter your address" required />
+            </textarea>
+
+            {% if msg %}
+            <h4 style="text-align:center;">{{msg}}</h4>
+            {% endif %}
+    
+
+            <button type="submit" class="registerbtn">Register</button>
+        </div>
+
+        <div class="container signin">
+            <p>Already have an account? <a href="#">Sign in</a>.</p>
+          </div>
+
+    </form>
+    
+</body>
+</html>

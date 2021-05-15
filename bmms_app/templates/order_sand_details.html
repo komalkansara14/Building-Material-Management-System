@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Sand Details</title>
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+</head>
+<body>
+    
+    <h1>Bricks</h1>
+    <form action="{% url 'order_sand_details' %}" method='POST'>
+
+    {% csrf_token %}
+
+        <div class="container">
+            <h1 style="text-align:center">Order Bricks Details</h1>
+
+            <label for="name">Name: {{user.name}}</label><br><br>
+            <input type="hidden" name="user" value="{{user}}">
+
+            <label for="address">Address: {{address}} </label><br><br>
+            <input type="hidden" name='address' value="{{address}}">
+            
+            <label for="quantity">Quantity: {{quantity}}</label><br><br>
+            <input type="hidden" name="quantity" value="{{quantity}}">
+
+            <label for="total_amt">Total amount: {{total}}</label><br><br>
+            <input type="hidden" name="total" value="{{total}}" >
+            
+            <button type="submit" class="registerbtn">Add to Cart</button>
+        </div>
+
+       
+    </form>
+    {% if msg %}
+        <h4>{{msg}}</h4>
+    {% endif %}
+    
+</body>
+</html>
